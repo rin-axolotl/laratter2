@@ -28,4 +28,9 @@ class Tweet extends Model
     {
       return $this->belongsToMany(User::class)->withTimestamps();
     }
+
+    public function bookmarks()
+    {
+        return $this->belongsToMany(User::class, 'bookmarks', 'user_id', 'tweet_id')->withTimestamps();
+    }
 }

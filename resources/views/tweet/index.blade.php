@@ -78,6 +78,28 @@
                       </x-primary-button>
                     </form>
                     @endif
+                    <!-- bookmark 状態で条件分岐 -->
+                    @if($tweet->bookmarks()->where('tweet_id', Auth::id())->exists())
+                    <!-- notbookmark ボタン -->
+                    <form action="{{ route('notbookmarks',$tweet) }}" method="POST" class="text-left">
+                      @csrf
+                      <x-primary-button class="ml-3">
+                        <svg class="h-6 w-6 text-red-500" fill="#0bd" viewBox="0 0 24 24" stroke="#0bd">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M2,2 L22,2 L22,22 L12,14 L2,22 z" />
+                        </svg>
+                      </x-primary-button>
+                    </form>
+                    @else
+                    <!-- bookmark ボタン -->
+                    <form action="{{ route('bookmarks',$tweet) }}" method="POST" class="text-left">
+                      @csrf
+                      <x-primary-button class="ml-3">
+                        <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="gray">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M2,2 L22,2 L22,22 L12,14 L2,22 z" />
+                        </svg>
+                      </x-primary-button>
+                    </form>
+                    @endif
                     <!-- 🔽 条件分岐でログインしているユーザが投稿したtweetのみ編集ボタンと削除ボタンが表示される -->
                     @if ($tweet->user_id === Auth::user()->id)
                     <!-- 更新ボタン -->
