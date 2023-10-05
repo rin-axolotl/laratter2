@@ -6,6 +6,8 @@ use App\Http\Controllers\TweetController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\BookmarkController;
+
 
 
 
@@ -21,6 +23,8 @@ use App\Http\Controllers\SearchController;
 */
 
 Route::middleware('auth')->group(function () {
+    Route::post('tweet/{tweet}/bookmarks', [BookmarkController::class, 'store'])->name('bookmarks');
+    Route::post('tweet/{tweet}/notbookmarks', [BookmarkController::class, 'destroy'])->name('notbookmarks');
     Route::get('/tweet/search/input', [SearchController::class, 'create'])->name('search.input');
     Route::get('/tweet/search/result', [SearchController::class, 'index'])->name('search.result');
     Route::get('/tweet/timeline', [TweetController::class, 'timeline'])->name('tweet.timeline');
