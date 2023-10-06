@@ -125,4 +125,15 @@ class TweetController extends Controller
             ->get();
         return view('tweet.index', compact('tweets'));
     }
+    public function mybookmarks()
+    {
+        // ブックマークしたツイートを取得する
+        $tweets = Tweet::query()
+            ->from ('bookmarks')
+            ->join('tweets', 'bookmarks.user_id', '=', 'tweets.id')
+            ->where('tweet_id', Auth::id())
+            //->orderBy('created_at','desc')
+            ->get();
+        return view('tweet.index', compact('tweets'));
+    }
 }
