@@ -23,6 +23,7 @@ use App\Http\Controllers\BookmarkController;
 */
 
 Route::middleware('auth')->group(function () {
+    Route::get('/tweet/mybookmarks', [TweetController::class, 'mybookmarks'])->name('tweet.mybookmarks');
     Route::post('tweet/{tweet}/bookmarks', [BookmarkController::class, 'store'])->name('bookmarks');
     Route::post('tweet/{tweet}/notbookmarks', [BookmarkController::class, 'destroy'])->name('notbookmarks');
     Route::get('/tweet/search/input', [SearchController::class, 'create'])->name('search.input');
